@@ -17,9 +17,9 @@
 
     <style>
         :root {
-            --bg-dark: #030712; 
-            --card-bg: rgba(255, 255, 255, 0.02);
-            --card-border: rgba(255, 255, 255, 0.06);
+            --bg-dark: #02040a; 
+            --card-bg: rgba(4, 7, 18, 0.7); 
+            --card-border: rgba(255, 255, 255, 0.08);
             --one-pink: #E3007F; 
             --neon-cyan: #00f2fe;
             --ocean-blue: #0284c7; 
@@ -43,11 +43,44 @@
         body {
             color: var(--text-main);
             overflow-x: hidden;
-            background: radial-gradient(circle at 50% 0%, #0b1528 0%, var(--bg-dark) 60%);
+            background-color: #02050f;
+            background-image: radial-gradient(circle at 50% 30%, #061022 0%, #02050f 80%);
             -webkit-font-smoothing: antialiased;
+            position: relative;
         }
 
-        /* Custom Dynamic Cursor - Hidden by default on touch devices */
+        /* 🌊 KHÔNG GIAN ĐẠI DƯƠNG CHỨA HẠM ĐỘI TÀU CONTAINER ĐỘ TƯƠNG PHẢN CAO */
+        .ocean-matrix {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .floating-ship {
+            position: absolute;
+            filter: drop-shadow(0 0 12px rgba(0, 242, 254, 0.2));
+            animation: sail linear infinite;
+            will-change: transform;
+            transition: color 0.4s ease, filter 0.4s ease, text-shadow 0.4s ease;
+        }
+
+        /* Định cấu hình hạm đội 6 tàu container sắc nét, chạy đan xen */
+        .ship-1 { top: 10%; font-size: 6.5rem; color: rgba(0, 242, 254, 0.12); animation-duration: 32s; right: -200px; }
+        .ship-2 { top: 28%; font-size: 4.5rem; color: rgba(255, 255, 255, 0.08); animation-duration: 45s; animation-delay: -8s; right: -200px; }
+        .ship-3 { top: 45%; font-size: 7.5rem; color: rgba(0, 242, 254, 0.09); animation-duration: 52s; animation-delay: -20s; right: -200px; }
+        .ship-4 { top: 60%; font-size: 5.0rem; color: rgba(255, 255, 255, 0.11); animation-duration: 38s; animation-delay: -15s; right: -200px; }
+        .ship-5 { top: 75%; font-size: 8.0rem; color: rgba(0, 242, 254, 0.07); animation-duration: 60s; animation-delay: -30s; right: -200px; }
+        .ship-6 { top: 90%; font-size: 5.5rem; color: rgba(255, 255, 255, 0.1); animation-duration: 42s; animation-delay: -5s; right: -200px; }
+
+        @keyframes sail {
+            0% { transform: translateX(0) translateY(0); }
+            50% { transform: translateX(-65vw) translateY(12px); }
+            100% { transform: translateX(-130vw) translateY(0); }
+        }
+
+        /* Custom Dynamic Cursor */
         .custom-cursor {
             display: none;
         }
@@ -71,7 +104,7 @@
 
         /* Navigation Glassmorphism */
         nav {
-            background: rgba(3, 7, 18, 0.85);
+            background: rgba(4, 7, 20, 0.85);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--card-border);
             position: fixed;
@@ -136,7 +169,7 @@
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom, rgba(3, 7, 18, 0.7) 0%, rgba(3, 7, 18, 0.95) 100%);
+            background: linear-gradient(to bottom, rgba(4, 7, 20, 0.6) 0%, rgba(4, 7, 20, 0.95) 100%);
             z-index: 1;
         }
 
@@ -212,6 +245,8 @@
             padding: 5rem 1.5rem;
             max-width: 1300px;
             margin: 0 auto;
+            position: relative;
+            z-index: 5; 
         }
 
         .section-title {
@@ -227,9 +262,10 @@
         .glass-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(20px); 
             border-radius: 20px;
             padding: 2rem 1.5rem;
+            transition: border-color 0.4s ease, box-shadow 0.4s ease;
         }
 
         .about-text {
@@ -250,14 +286,17 @@
         .feature-card {
             padding: 2rem 1.5rem;
             border-radius: 16px;
-            background: rgba(255, 255, 255, 0.005);
+            background: rgba(4, 7, 20, 0.55);
             border: 1px solid var(--card-border);
+            backdrop-filter: blur(10px);
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.4s ease, box-shadow 0.4s ease;
         }
 
         .feature-card i {
             font-size: 2rem;
             color: var(--ocean-blue);
             margin-bottom: 1rem;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.3s ease;
         }
 
         .feature-card h3 {
@@ -283,8 +322,10 @@
             position: relative;
             padding: 2rem 1.5rem;
             border-radius: 16px;
-            background: var(--card-bg);
+            background: rgba(4, 7, 20, 0.55);
             border: 1px solid var(--card-border);
+            backdrop-filter: blur(10px);
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.4s ease, box-shadow 0.4s ease;
         }
 
         .timeline-card::before {
@@ -292,6 +333,12 @@
             position: absolute;
             top: 0; left: 0; width: 3px; height: 100%;
             background: var(--ocean-blue);
+            transition: background-color 0.4s ease, width 0.2s ease;
+        }
+
+        .timeline-card ul {
+            list-style: none;
+            padding-left: 0;
         }
 
         .job-header {
@@ -318,23 +365,28 @@
             color: var(--text-main);
             border: 1px solid var(--card-border);
             line-height: 1.3;
+            transition: border-color 0.3s ease;
         }
 
         .timeline-card li {
             margin-bottom: 0.7rem;
             position: relative;
-            padding-left: 1.2rem;
+            padding-left: 1.5rem;
             color: var(--text-muted);
             font-size: 0.9rem;
             line-height: 1.5;
         }
 
         .timeline-card li::before {
-            content: '▪';
+            content: '';
             position: absolute;
-            left: 0; top: 0;
-            color: var(--ocean-blue);
-            font-size: 1rem;
+            left: 0; 
+            top: 6px;
+            width: 6px;
+            height: 6px;
+            background-color: var(--ocean-blue);
+            border-radius: 1px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
         /* Grid System for Skills & Certs */
@@ -352,12 +404,13 @@
         }
 
         .cyber-tag {
-            background: rgba(255,255,255,0.02);
+            background: rgba(255,255,255,0.03);
             border: 1px solid var(--card-border);
             padding: 0.5rem 0.9rem;
             border-radius: 10px;
             font-size: 0.8rem;
             font-weight: 600;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         /* Certificate Badges */
@@ -365,11 +418,12 @@
             display: flex;
             align-items: center;
             gap: 1rem;
-            background: rgba(255, 255, 255, 0.01);
+            background: rgba(4, 7, 20, 0.4);
             border: 1px solid var(--card-border);
             padding: 1rem;
             border-radius: 14px;
             margin-bottom: 1rem;
+            transition: border-color 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
         }
 
         .cert-row h4 {
@@ -388,6 +442,7 @@
             font-size: 1.6rem;
             color: #eab308;
             flex-shrink: 0;
+            transition: transform 0.3s ease;
         }
 
         .foundations-box h5 {
@@ -403,15 +458,18 @@
 
         /* Footer */
         footer {
+            background-color: #040612;
             border-top: 1px solid var(--card-border);
             padding: 2rem 1.5rem;
             text-align: center;
             color: var(--text-muted);
             margin-top: 4rem;
             font-size: 0.8rem;
+            position: relative;
+            z-index: 5;
         }
 
-        /* Desktop Media Queries Restoration (Nâng cấp giao diện khi xem bằng máy tính) */
+        /* Desktop Restoration & Micro-Interactions */
         @media (min-width: 768px) {
             .nav-container { padding: 1.2rem 2rem; }
             .nav-links li a { font-size: 0.95rem; gap: 2.5rem; }
@@ -432,17 +490,56 @@
             .cyber-tag { font-size: 0.9rem; padding: 0.6rem 1.2rem; }
             .cert-row h4 { font-size: 1.15rem; }
             
-            .feature-card:hover { transform: translateY(-8px); border-color: var(--ocean-blue); background: rgba(255, 255, 255, 0.02); }
-            .feature-card:hover i { color: var(--one-pink); }
-            .timeline-card:hover { border-color: rgba(255,255,255,0.15); transform: translateX(6px); background: rgba(255, 255, 255, 0.02); }
-            .timeline-card:hover::before { background: var(--one-pink); }
+            .glass-card:hover { border-color: rgba(227, 0, 127, 0.25); box-shadow: 0 25px 60px rgba(227, 0, 127, 0.05); }
+            
+            .feature-card:hover { 
+                transform: translateY(-8px) scale(1.02); 
+                border-color: var(--ocean-blue); 
+                background: rgba(4, 7, 20, 0.8);
+                box-shadow: 0 15px 30px rgba(2, 132, 199, 0.2);
+            }
+            .feature-card:hover i { color: var(--one-pink); transform: scale(1.15) rotate(5deg); }
+            
+            .timeline-card:hover { 
+                border-color: rgba(223, 0, 127, 0.4); 
+                transform: translateX(8px); 
+                background: rgba(4, 7, 20, 0.8);
+                box-shadow: 0 15px 35px rgba(227, 0, 127, 0.15);
+            }
+            .timeline-card:hover::before { background: var(--one-pink); width: 4px; }
+            .timeline-card:hover li::before { background-color: var(--one-pink); transform: scale(1.2); }
+            .timeline-card:hover .company-tag { border-color: var(--one-pink); color: var(--one-pink); }
+            
             .contact-info a:hover { border-color: var(--one-pink); background: rgba(223, 0, 127, 0.05); transform: translateY(-4px); }
-            .cyber-tag:hover { background: var(--text-main); color: var(--bg-dark); transform: translateY(-2px); border-color: transparent; }
-            .cert-row:hover { border-color: rgba(255, 255, 255, 0.15); transform: translateX(4px); }
+            
+            .cyber-tag:hover { 
+                background: var(--text-main); 
+                color: var(--bg-dark); 
+                transform: translateY(-3px) scale(1.05); 
+                border-color: transparent;
+                box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+            }
+            
+            .cert-row:hover { 
+                border-color: var(--one-pink); 
+                transform: translateX(6px); 
+                background: rgba(227, 0, 127, 0.08);
+            }
+            .cert-row:hover .cert-glow-icon { transform: scale(1.1) rotate(-8deg); }
         }
     </style>
 </head>
 <body>
+
+    <!-- LỚP NỀN CHỨA HẠM ĐỘI TÀU CONTAINER ĐỘ TƯƠNG PHẢN CAO CHẠY LIÊN TỤC -->
+    <div class="ocean-matrix">
+        <i class="fa-solid fa-ship floating-ship ship-1" id="ship1"></i>
+        <i class="fa-solid fa-ship floating-ship ship-2" id="ship2"></i>
+        <i class="fa-solid fa-ship floating-ship ship-3" id="ship3"></i>
+        <i class="fa-solid fa-ship floating-ship ship-4" id="ship4"></i>
+        <i class="fa-solid fa-ship floating-ship ship-5" id="ship5"></i>
+        <i class="fa-solid fa-ship floating-ship ship-6" id="ship6"></i>
+    </div>
 
     <!-- Cyber Pink Accent Follower -->
     <div class="custom-cursor" id="cursor"></div>
@@ -511,12 +608,12 @@
             <div class="timeline-card" data-aos="fade-up">
                 <div class="job-header">
                     <div class="job-title">Salesforce Developer</div>
-                    <div class="company-tag" style="border-color: rgba(223,0,127,0.3); color: var(--one-pink);">ONE TECH STOP VIET NAM // 07/2023 - Present</div>
+                    <div class="company-tag">ONE TECH STOP VIET NAM // 07/2023 - Present</div>
                 </div>
                 <ul>
-                    <li>Engineered custom cloud solutions tailored explicitly for deep Logistics business demands.</li>
-                    <li>Designed robust automated architectures minimizing ticket response lag through Email-to-Case, Web-to-Case, and Omni-Channel suites.</li>
-                    <li>Maintained mission-critical codebases, resolved complex multi-tenant user bugs, and optimized internal sales flows.</li>
+                    <li>Customize the system, maintain it for logistics, fix bugs, and resolve issues reported by customers.</li>
+                    <li>Strategically develop sales functions tailored to address logistics requirements.</li>
+                    <li>Proficient in problem-solving with Email-to-Case, Web-to-Case, and Omni-Channel solutions to enhance customer interactions and streamline processes.</li>
                 </ul>
             </div>
 
@@ -527,9 +624,10 @@
                     <div class="company-tag">Keizu Viet Nam // 12/2020 - 04/2023</div>
                 </div>
                 <ul>
-                    <li>Authored technical specification documents and translated business operations into logic flows for internal engineering pools.</li>
-                    <li>Constructed, extended, and modularized Aura Components, Apex Custom Classes, Batch engines, and complex Triggers.</li>
-                    <li>Orchestrated custom fields architecture, formula computations, validation rule frameworks, and clean page layout visualizers.</li>
+                    <li>Develop, maintain, create, and improve validation rules, custom workflows, Apex customizations, custom objects, fields, and formulas.</li>
+                    <li>Works within established procedures to develop, test, implement, and maintain application software.</li>
+                    <li>Business analysis and document writing for developers.</li>
+                    <li>Developing applications about Aura lighting, Batch, Trigger, and Visualforce pages.</li>
                 </ul>
             </div>
 
@@ -593,10 +691,10 @@
 
                 <h3 style="font-size: 1.25rem; margin-top: 2rem; margin-bottom: 1rem;"><i class="fa-solid fa-graduation-cap"></i> Foundations</h3>
                 <div class="foundations-box" style="padding-left: 1rem; border-left: 2px solid var(--ocean-blue);">
-                    <h5>B.S. Information Systems</h5>
+                    <h5>INFORMATION SYSTEM</h5>
                     <p style="color: var(--text-muted); margin-bottom: 0.8rem; font-weight: 500;">Posts and Telecommunications Institute of Technology</p>
                     <p style="color: var(--text-muted); font-weight: 600; margin-bottom: 0.3rem;"><i class="far fa-star"></i> PHP & MySQL Certified | TEL4VN</p>
-                    <p style="color: var(--text-muted); font-weight: 600;"><i class="far fa-star"></i> C++ Logic Certified | BECODECHING</p>
+                    <p style="color: var(--text-muted); font-weight: 600;"><i class="far fa-star"></i> C++ Certified | BECODECHING CENTER</p>
                 </div>
             </div>
 
@@ -617,15 +715,52 @@
         // Init Scroll Animations
         AOS.init({ duration: 800, once: true });
 
-        // Custom Mouse Pointer Tracker (Only active on Desktop)
+        // TƯƠNG TÁC VẬT LÝ KHI DI CHUỘT QUA CÁC CON TÀU NỀN
         const cursor = document.getElementById('cursor');
-        if(window.matchMedia('(pointer: fine)').matches) {
-            document.addEventListener('mousemove', e => {
-                cursor.style.left = e.clientX + 'px';
-                cursor.style.top = e.clientY + 'px';
-            });
+        const ships = [
+            document.getElementById('ship1'), document.getElementById('ship2'), 
+            document.getElementById('ship3'), document.getElementById('ship4'),
+            document.getElementById('ship5'), document.getElementById('ship6')
+        ];
+        
+        document.addEventListener('mousemove', e => {
+            const mouseX = e.clientX;
+            const mouseY = e.clientY;
+            
+            // Cập nhật vị trí chuột custom
+            if(window.matchMedia('(pointer: fine)').matches) {
+                cursor.style.left = mouseX + 'px';
+                cursor.style.top = mouseY + 'px';
+            }
 
-            document.querySelectorAll('a, .cyber-tag, .timeline-card').forEach(item => {
+            // Từ trường đẩy hạm đội tàu & kích hoạt màu Neon Hồng rực của hãng ONE
+            ships.forEach(ship => {
+                const rect = ship.getBoundingClientRect();
+                const shipX = rect.left + rect.width / 2;
+                const shipY = rect.top + rect.height / 2;
+                
+                const distance = Math.hypot(mouseX - shipX, mouseY - shipY);
+                
+                if (distance < 250) {
+                    const angle = Math.atan2(shipY - mouseY, shipX - mouseX);
+                    const force = (250 - distance) * 0.3; // Tăng lực đẩy nhạy hơn
+                    const transformX = Math.cos(angle) * force;
+                    const transformY = Math.sin(angle) * force;
+                    
+                    ship.style.transform = `translate(${transformX}px, ${transformY}px)`;
+                    ship.style.filter = 'drop-shadow(0 0 25px #E3007F)';
+                    ship.style.color = '#E3007F'; /* Chuyển thành màu Hồng ONE rực rỡ khi chạm chuột */
+                } else {
+                    ship.style.transform = '';
+                    ship.style.filter = '';
+                    ship.style.color = '';
+                }
+            });
+        });
+
+        // Expand cursor subtle animations on hover các khối thẻ bài
+        if(window.matchMedia('(pointer: fine)').matches) {
+            document.querySelectorAll('a, .cyber-tag, .timeline-card, .feature-card, .cert-row').forEach(item => {
                 item.addEventListener('mouseenter', () => {
                     cursor.style.width = '35px';
                     cursor.style.height = '35px';
@@ -647,7 +782,7 @@
             loop: true
         });
 
-        // Responsive Particles Density Settings
+        // Responsive Particles Density Settings cho ảnh bìa
         const isMobile = window.innerWidth < 768;
         particlesJS('particles-js', {
             "particles": {
@@ -656,7 +791,7 @@
                 "opacity": { "value": 0.6, "random": true },
                 "size": { "value": isMobile ? 2 : 3.5, "random": true },
                 "line_linked": { 
-                    "enable": !isMobile, /* Disable tracking lines on mobile to maximize render performance */
+                    "enable": !isMobile, 
                     "distance": 125, 
                     "color": "#00f2fe", 
                     "opacity": 0.35, 
