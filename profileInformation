@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toan Do | Salesforce Logistic Engineer 🚢</title>
+    
+    <!-- Premium Google Fonts: Plus Jakarta Sans for body -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Clash Display Font -->
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-dark: #030712; 
+            --card-bg: rgba(255, 255, 255, 0.015);
+            --card-border: rgba(255, 255, 255, 0.06);
+            --one-pink: #E3007F; 
+            --neon-cyan: #00f2fe;
+            --ocean-blue: #0284c7; 
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            cursor: none; 
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background-color: var(--bg-dark);
+        }
+
+        body {
+            color: var(--text-main);
+            overflow-x: hidden;
+            background: radial-gradient(circle at 50% 0%, #0b1528 0%, var(--bg-dark) 60%);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Custom Dynamic Cursor */
+        .custom-cursor {
+            width: 18px;
+            height: 18px;
+            border: 2px solid var(--one-pink);
+            border-radius: 50%;
+            position: fixed;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9999;
+            transition: width 0.15s, height 0.15s, background-color 0.15s;
+            box-shadow: 0 0 12px var(--one-pink);
+        }
+
+        /* Navigation Glassmorphism */
+        nav {
+            background: rgba(3, 7, 18, 0.75);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--card-border);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 2rem;
+        }
+
+        .logo {
+            font-family: 'Clash Display', sans-serif;
+            font-weight: 700;
+            font-size: 1.4rem;
+            letter-spacing: 0.5px;
+            color: var(--text-main);
+        }
+        
+        .logo span {
+            color: var(--one-pink);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+
+        .nav-links li a:hover {
+            color: var(--one-pink);
+        }
+
+        /* Hero Section with Ship Background Image */
+        header {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 2rem;
+            overflow: hidden;
+            background: url('https://www.heavyliftnews.com/wp-content/uploads/2020/12/1228-ONE-Container-Ship.jpg') no-repeat center center/cover;
+        }
+
+        /* Dark overlay filter for high professional contrast */
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(3, 7, 18, 0.65) 0%, rgba(3, 7, 18, 0.9) 100%);
+            z-index: 1;
+        }
+
+        #particles-js {
+            position: absolute;
+            width: 100%; height: 100%;
+            top: 0; left: 0;
+            z-index: 2;
+        }
+
+        .hero-container {
+            position: relative;
+            z-index: 3;
+            max-width: 950px;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+            padding: 0.5rem 1.4rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        header h1 {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.05;
+            letter-spacing: -1px;
+        }
+
+        header h2 {
+            font-size: 1.9rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-info a, .contact-info span {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--card-border);
+            padding: 0.7rem 1.4rem;
+            border-radius: 14px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            border-color: var(--one-pink);
+            background: rgba(223, 0, 127, 0.05);
+            transform: translateY(-4px);
+        }
+
+        /* Global Sections */
+        section {
+            padding: 8rem 2rem;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 3.2rem;
+            font-weight: 600;
+            margin-bottom: 4rem;
+            text-align: center;
+            letter-spacing: -0.5px;
+        }
+
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(10px);
+            border-radius: 28px;
+            padding: 3.5rem;
+            transition: all 0.4s ease;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .about-text {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            color: #e5e7eb;
+            text-align: center;
+        }
+
+        /* Summary Grid */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3.5rem;
+        }
+
+        .feature-card {
+            padding: 2.5rem;
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.005);
+            border: 1px solid var(--card-border);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.02);
+            border-color: var(--ocean-blue);
+        }
+
+        .feature-card i {
+            font-size: 2.2rem;
+            color: var(--ocean-blue);
+            margin-bottom: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .feature-card:hover i {
+            color: var(--one-pink); 
+        }
+
+        .feature-card h3 {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+
+        /* Cyber Work Timeline */
+        .timeline-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .timeline-card {
+            position: relative;
+            padding: 2.5rem;
+            border-radius: 22px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-card:hover {
+            border-color: rgba(255,255,255,0.15);
+            transform: translateX(6px);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .timeline-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 3px; height: 100%;
+            background: var(--ocean-blue);
+            transition: background 0.3s;
+        }
+
+        .timeline-card:hover::before {
+            background: var(--one-pink); 
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .job-title {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 1.7rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .company-tag {
+            background: rgba(255, 255, 255, 0.04);
+            padding: 0.5rem 1.2rem;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: var(--text-main);
+            border: 1px solid var(--card-border);
+        }
+
+        .timeline-card li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 1.5rem;
+            color: var(--text-muted);
+        }
+
+        .timeline-card li::before {
+            content: '▪';
+            position: absolute;
+            left: 0; top: 0;
+            color: var(--ocean-blue);
+            font-size: 1.2rem;
+        }
+
+        /* Grid System for Skills & Certs */
+        .split-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 3rem;
+        }
+
+        @media (max-width: 968px) {
+            .split-grid { grid-template-columns: 1fr; }
+            header h1 { font-size: 3.2rem; }
+        }
+
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .cyber-tag {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--card-border);
+            padding: 0.6rem 1.2rem;
+            border-radius: 14px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .cyber-tag:hover {
+            background: var(--text-main);
+            color: var(--bg-dark);
+            transform: translateY(-2px);
+            border-color: transparent;
+        }
+
+        /* Certificate Badges */
+        .cert-row {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid var(--card-border);
+            padding: 1.2rem;
+            border-radius: 18px;
+            margin-bottom: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .cert-row:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateX(4px);
+        }
+
+        .cert-row h4 {
+            font-family: 'Clash Display', sans-serif;
+            font-weight: 600;
+            font-size: 1.15rem;
+        }
+
+        .cert-glow-icon {
+            font-size: 2rem;
+            color: #eab308;
+        }
+
+        .foundations-box h5 {
+            font-family: 'Clash Display', sans-serif;
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-bottom: 0.2rem;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--card-border);
+            padding: 3rem 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            margin-top: 6rem;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cyber Pink Accent Follower -->
+    <div class="custom-cursor" id="cursor"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">TOAN.DO<span> //</span></div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Ecosystem</a></li>
+                <li><a href="#skills">Skills</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Premium Ocean Logistics Cover Image -->
+    <header id="hero">
+        <div id="particles-js"></div>
+        <div class="hero-container" data-aos="zoom-out" data-aos-duration="1200">
+            <div class="badge">🚢 SPECIALIZED IN LOGISTICS CRM ARCHITECTURE</div>
+            <h1>Hi, I'm Do Ba Toan</h1>
+            <h2>I engineer <span id="typed" style="color: var(--one-pink);"></span></h2>
+            <div class="contact-info">
+                <span><i class="fas fa-phone-alt"></i> 0337100035</span>
+                <a href="mailto:dobatoant28@gmail.com"><i class="fas fa-envelope"></i> dobatoant28@gmail.com</a>
+                <a href="https://trailblazer.me/id/welcome29320" target="_blank"><i class="fas fa-cloud"></i> Trailblazer</a>
+                <span><i class="fas fa-map-marker-alt"></i> Quang Binh, VN</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="glass-card" data-aos="fade-up">
+            <h2 class="section-title" style="margin-bottom: 2rem;">⚡ Mission Statement</h2>
+            <p class="about-text">Salesforce Developer experienced in development, customization, and integration. Passionate about driving business growth and enhancing user experience. I wield architectural-level cloud pipelines built to optimize global freight visibility, digital transport management matrices, and scalable enterprise automated workflows.</p>
+            
+            <div class="grid-3">
+                <div class="feature-card">
+                    <i class="fa-solid fa-ship"></i>
+                    <h3>Logistics Cloud Flow</h3>
+                    <p style="color: var(--text-muted);">Customizing robust CRM engines designed purposefully to tackle international supply chain and freight forwarding demands.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-bolt"></i>
+                    <h3>Omni-Channel Support</h3>
+                    <p style="color: var(--text-muted);">Integrating Email-to-Case, Web-to-Case, and Omni-Channel suites to minimize ticket lag for premium global clients.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-box-open"></i>
+                    <h3>Data Pipelines</h3>
+                    <p style="color: var(--text-muted);">Executing heavy-duty data cleansing, Batch Apex schedulers, and seamless imports via Apex Data Loader utility.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <h2 class="section-title" data-aos="fade-up">💼 Professional Ecosystem</h2>
+        
+        <div class="timeline-container">
+            
+            <!-- Job 1 -->
+            <div class="timeline-card" data-aos="fade-up">
+                <div class="job-header">
+                    <div class="job-title">Salesforce Developer</div>
+                    <div class="company-tag" style="border-color: rgba(223,0,127,0.3); color: var(--one-pink);">ONE TECH STOP VIET NAM // 07/2023 - Present</div>
+                </div>
+                <ul>
+                    <li>Engineered custom cloud solutions tailored explicitly for deep Logistics business demands.</li>
+                    <li>Designed robust automated architectures minimizing ticket response lag through Email-to-Case, Web-to-Case, and Omni-Channel suites.</li>
+                    <li>Maintained mission-critical codebases, resolved complex multi-tenant user bugs, and optimized internal sales flows.</li>
+                </ul>
+            </div>
+
+            <!-- Job 2 -->
+            <div class="timeline-card" data-aos="fade-up">
+                <div class="job-header">
+                    <div class="job-title">Salesforce Developer</div>
+                    <div class="company-tag">Keizu Viet Nam // 12/2020 - 04/2023</div>
+                </div>
+                <ul>
+                    <li>Authored technical specification documents and translated business operations into logic flows for internal engineering pools.</li>
+                    <li>Constructed, extended, and modularized Aura Components, Apex Custom Classes, Batch engines, and complex Triggers.</li>
+                    <li>Orchestrated custom fields architecture, formula computations, validation rule frameworks, and clean page layout visualizers.</li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="split-grid">
+            
+            <!-- Tech Stacks -->
+            <div class="glass-card" data-aos="fade-right">
+                <h3 style="font-size: 1.8rem; margin-bottom: 2rem;"><i class="fa-solid fa-layer-group" style="color: var(--ocean-blue);"></i> Tech Stacks</h3>
+                
+                <p style="color: var(--ocean-blue); margin-bottom: 0.8rem; font-weight: 700; font-size: 0.9rem; letter-spacing: 0.5px;">CRM & NATIVE ARCHITECTURES</p>
+                <div class="tag-cloud">
+                    <span class="cyber-tag">Apex</span>
+                    <span class="cyber-tag">Lightning Web Components (LWC)</span>
+                    <span class="cyber-tag">Aura Components</span>
+                    <span class="cyber-tag">Visualforce Pages</span>
+                    <span class="cyber-tag">Apex Data Loader</span>
+                    <span class="cyber-tag">Process Builder & Workflows</span>
+                </div>
+
+                <p style="color: var(--text-muted); margin-bottom: 0.8rem; font-weight: 700; font-size: 0.9rem; letter-spacing: 0.5px;">FULL-STACK & BACKENDS</p>
+                <div class="tag-cloud">
+                    <span class="cyber-tag">Java Spring MVC</span>
+                    <span class="cyber-tag">.NET</span>
+                    <span class="cyber-tag">C++</span>
+                    <span class="cyber-tag">PHP & MySQL</span>
+                </div>
+
+                <p style="color: var(--text-muted); margin-bottom: 0.8rem; font-weight: 700; font-size: 0.9rem; letter-spacing: 0.5px;">DEV METHODOLOGIES & VIBES</p>
+                <div class="tag-cloud">
+                    <span class="cyber-tag">Agile / Scrum</span>
+                    <span class="cyber-tag">Waterfall</span>
+                    <span class="cyber-tag">English (Intermediate)</span>
+                    <span class="cyber-tag">Japanese (Beginner)</span>
+                </div>
+            </div>
+
+            <!-- Credentials -->
+            <div class="glass-card" data-aos="fade-left">
+                <h3 style="font-size: 1.8rem; margin-bottom: 2rem;"><i class="fa-solid fa-trophy" style="color: var(--ocean-blue);"></i> Verified Badges</h3>
+                
+                <div class="cert-row">
+                    <i class="fa-solid fa-award cert-glow-icon"></i>
+                    <div>
+                        <h4>Salesforce Certified Administrator</h4>
+                        <p style="color: var(--text-muted); font-size: 0.85rem; font-weight: 500; margin-top: 0.2rem;">October 2022</p>
+                    </div>
+                </div>
+
+                <div class="cert-row">
+                    <i class="fa-solid fa-award cert-glow-icon" style="color: var(--ocean-blue);"></i>
+                    <div>
+                        <h4>Salesforce Certified Platform Developer I</h4>
+                        <p style="color: var(--text-muted); font-size: 0.85rem; font-weight: 500; margin-top: 0.2rem;">October 2021</p>
+                    </div>
+                </div>
+
+                <h3 style="font-size: 1.4rem; margin-top: 3rem; margin-bottom: 1.5rem;"><i class="fa-solid fa-graduation-cap"></i> Foundations</h3>
+                <div class="foundations-box" style="padding-left: 1rem; border-left: 2px solid var(--ocean-blue);">
+                    <h5>B.S. Information Systems</h5>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.2rem; font-weight: 500;">Posts and Telecommunications Institute of Technology</p>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600; margin-bottom: 0.4rem;"><i class="far fa-star"></i> PHP & MySQL Certified | TEL4VN</p>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;"><i class="far fa-star"></i> C++ Logic Certified | BECODECHING</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>// Driven by Cloud Operations & Containerized Logistics Logic // 2026</p>
+    </footer>
+
+    <!-- Libraries -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+    <script>
+        // Init Scroll Animations
+        AOS.init({ duration: 800, once: true });
+
+        // Custom Mouse Pointer Tracker
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', e => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // Expand cursor subtle animations on hover
+        document.querySelectorAll('a, .cyber-tag, .timeline-card').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                cursor.style.width = '35px';
+                cursor.style.height = '35px';
+                cursor.style.backgroundColor = 'rgba(227, 0, 127, 0.08)';
+            });
+            item.addEventListener('mouseleave', () => {
+                cursor.style.width = '18px';
+                cursor.style.height = '18px';
+                cursor.style.backgroundColor = 'transparent';
+            });
+        });
+
+        // Typing config
+        new Typed('#typed', {
+            strings: ['Logistics Salesforce Engines ☁️', 'Ocean Network Freight CRM Architecture 🚢', 'High-Performance Apex & LWC Solutions ⚡'],
+            typeSpeed: 50,
+            backSpeed: 30,
+            loop: true
+        });
+
+        // Ultra-sharp Multi-color Reactive Interaction Particle Grid Coded
+        particlesJS('particles-js', {
+            "particles": {
+                "number": { "value": 110, "density": { "enable": true, "value_area": 900 } },
+                "color": { "value": ["#E3007F", "#00f2fe", "#ffffff"] }, /* Dynamic Mixed Color palette */
+                "opacity": { "value": 0.7, "random": true }, /* Enhanced bold base visibility */
+                "size": { "value": 3.5, "random": true },
+                "line_linked": { 
+                    "enable": true, 
+                    "distance": 125, 
+                    "color": "#00f2fe", 
+                    "opacity": 0.4, /* Highly visible structural line segments */
+                    "width": 1.2 
+                },
+                "move": { "enable": true, "speed": 2.2, "direction": "none", "random": true, "out_mode": "out" }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": { 
+                    "onhover": { "enable": true, "mode": "grab" }, /* Attaches connection threads closely on hover */
+                    "onclick": { "enable": true, "mode": "push" }
+                },
+                "modes": { 
+                    "grab": { "distance": 180, "line_linked": { "opacity": 0.95 } }, /* Sucking vibrant matrix web lines onto the mouse pointer */
+                    "push": { "particles_nb": 3 }
+                }
+            },
+            "retina_detect": true
+        });
+    </script>
+</body>
+</html>
